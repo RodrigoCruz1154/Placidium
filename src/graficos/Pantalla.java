@@ -10,7 +10,7 @@ public final class Pantalla {
     //variables temporales
     private final static int LADO_SPRITE = 32;
     private final static int MASCARA_SPRITE = LADO_SPRITE-1;
-    //fin :V
+    //fin
     
     public Pantalla(final int ancho, final int alto){
         this.ancho = ancho;
