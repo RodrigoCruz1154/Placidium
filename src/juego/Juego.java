@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class Juego extends Canvas implements Runnable{ //con el implements ponemos una interfaz para poder generar procesos seguidos.
@@ -24,6 +25,7 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
     
     private int[]pixeles = ((DataBufferInt)imagen.getRaster().getDataBuffer()).getData(); //devuelve un array de int que representa los pixeles de la imagen
     
+    private static final ImageIcon icono = new ImageIcon(Juego.class.getResource("/icono/logo.png"));
     
     private static volatile boolean enFuncionamiento = false; //Nos dice si se está iniciando (el tipo volatile sirve para que no se pueda utilizar el método de forma simultánea y evitar crasheos)
     
@@ -50,6 +52,7 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
         ventana = new JFrame(NOMBRE);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //El usuario podrá cerrar la ventana al pulsar "x"
         ventana.setResizable(false); //El usuario no podrá cambiar el tamaño de la ventana
+        ventana.setIconImage(icono.getImage());
         ventana.setLayout(new BorderLayout());  //Para dejar ordenada la ventana
         ventana.add(this, BorderLayout.CENTER); //Para que la ventana se abra justo en el centro
         ventana.pack(); //TODO EL CONTENIDO SE AJUSTA AL TAMAÑO DESEADO
