@@ -17,7 +17,7 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
 
     private static JFrame ventana;
     private static Thread thread; //creamos el thread
-    private static Teclado teclado;
+    private static Teclado teclado; // ACCIONES DEL TECLADO
     private static Pantalla pantalla;
     
     private BufferedImage imagen = new BufferedImage(ANCHO,ALTO,BufferedImage.TYPE_INT_RGB);
@@ -30,7 +30,7 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
     private static final int ANCHO = 1000;
     private static final int ALTO = 650;
     
-    private static final String NOMBRE = "Beta Juego";
+    private static final String NOMBRE = "Placidium";
     
     private static int aps = 0;
     private static int fps = 0;
@@ -80,16 +80,29 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
         teclado.actualizar();
         
         if(teclado.arriba){
-            System.out.println("arriba");
+            y++;
         }
         if(teclado.abajo){
-            System.out.println("abajo");
+            y--;
         }
         if(teclado.izquierda){
-            System.out.println("izquierda");
+            x++;
         }
         if(teclado.derecha){
-            System.out.println("derecha");
+            x--;
+        }
+
+        if (teclado.shift && teclado.arriba) {
+            y = y + 1;
+        }
+        if (teclado.shift && teclado.abajo) {
+            y = y - 1;
+        }
+        if (teclado.shift && teclado.izquierda) {
+            x = x + 1;
+        }
+        if (teclado.shift && teclado.derecha) {
+            x = x - 1;
         }
         
         aps++;

@@ -12,18 +12,18 @@ public final class Teclado implements KeyListener{
     public boolean abajo;
     public boolean izquierda;
     public boolean derecha;
+    public boolean espacio;
+    public boolean shift;
     
     public void actualizar(){
         arriba = teclas[KeyEvent.VK_W];
         abajo = teclas[KeyEvent.VK_S];
         izquierda = teclas[KeyEvent.VK_A];
         derecha = teclas[KeyEvent.VK_D];
+        espacio = teclas[KeyEvent.VK_SPACE];
+        shift = teclas[KeyEvent.VK_SHIFT];
     }
     
-    public void keyTyped(KeyEvent e) {
-        
-    }
-
     public void keyPressed(KeyEvent e) { //método para cuando se pulse una tecla
         teclas[e.getKeyCode()] = true;
 
@@ -33,5 +33,10 @@ public final class Teclado implements KeyListener{
         teclas[e.getKeyCode()] = false;
 
     }
+    
+        public void keyTyped(KeyEvent e) { // LA ACCIÓN COMPLETA DE SOLTAR Y PRESIONAR LA TECLA
+        
+    }
+
     
 }

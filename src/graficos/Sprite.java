@@ -1,4 +1,4 @@
-package graficos;
+ package graficos;
 
 public final class Sprite {
     private final int lado;
