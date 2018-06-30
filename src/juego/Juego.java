@@ -4,6 +4,7 @@ import control.Teclado;
 import graficos.Pantalla;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
@@ -52,17 +53,20 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
         ventana = new JFrame(NOMBRE);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //El usuario podrá cerrar la ventana al pulsar "x"
         ventana.setResizable(false); //El usuario no podrá cambiar el tamaño de la ventana
-        ventana.setIconImage(icono.getImage());
+        ventana.setIconImage(icono.getImage()); //Pone un ícono
         ventana.setLayout(new BorderLayout());  //Para dejar ordenada la ventana
         ventana.add(this, BorderLayout.CENTER); //Para que la ventana se abra justo en el centro
         ventana.pack(); //TODO EL CONTENIDO SE AJUSTA AL TAMAÑO DESEADO
         ventana.setLocationRelativeTo(null); //Fija la ventana
         ventana.setVisible(true);
-}
-    public static void main(String[] args) {
-        Juego juego = new Juego();
-        juego.iniciar();
     }
+
+    public static void main(String[] args) {
+            Juego juego = new Juego();
+            juego.iniciar();
+            
+    }
+    
 //threads a ejecutarse en segundo plano y que harán que "se ejecuten varios procesos a la vez"
     private synchronized void iniciar(){ //similar a volatile synchronized evita que se utilizen los métodos a la vez
         enFuncionamiento = true;
@@ -128,8 +132,11 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
         // }
         
         Graphics g= estrategia.getDrawGraphics(); //es el encargado de dibujar de la estrategia (buffer)
-        
         g.drawImage(imagen, 0, 0, getWidth(), getHeight(), null);
+        
+        g.setColor(Color.DARK_GRAY);
+        g.fillRect(ANCHO/2,ALTO/2, 32, 32);
+        
         g.dispose(); //destruye la memoria que g estaba usando para que no use más y más memoria
         
         estrategia.show(); //hace que se muestre todo en pantalla

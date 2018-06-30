@@ -1,5 +1,7 @@
 package graficos;
-
+/**
+ * Ensambla la imagen que se muestra en pantalla.
+ */
 public final class Pantalla {
     private final int ancho;
     private final int alto;
