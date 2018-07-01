@@ -7,12 +7,38 @@ public final class Sprite {
     private int y;
     
     public int[] pixeles;
-    private final HojaSprites hoja;
+    private HojaSprites hoja;
     
     //colección de sprites
-    public static Sprite tierra = new Sprite(32, 0, 0, HojaSprites.tierra);
+    public static final Sprite TIERRA = new Sprite(32, 0, 0, HojaSprites.tierra);
+    public static final Sprite VACIO = new Sprite(32,0x175063);
     //fin de la colección
-    
+    /**
+     * Inicia el Sprite sin necesidad de cargar un Sprite predefinido. Basta con nombrar un color y su tamaño.
+     * @param lado
+     * @param color 
+     */
+    public Sprite(final int lado, final int color){
+        this.lado = lado;
+        pixeles = new int[lado*lado];
+        for(int i = 0; i < pixeles.length; i++){
+            pixeles[i] = color;
+        }
+    }
+    /**
+     * Devuelve el valor de el lado.
+     * @return 
+     */
+    public int getLado() {
+        return lado;
+    }
+    /**
+     * Carga un Sprite predeterminado.
+     * @param lado
+     * @param columna
+     * @param fila
+     * @param hoja 
+     */
     public Sprite(int lado, final int columna, final int fila, final HojaSprites hoja){
         this.lado = lado;
         

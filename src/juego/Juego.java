@@ -14,6 +14,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import mapa.Mapa;
+import mapa.MapaGenerado;
 
 public class Juego extends Canvas implements Runnable{ //con el implements ponemos una interfaz para poder generar procesos seguidos.
 
@@ -21,6 +23,8 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
     private static Thread thread; //creamos el thread
     private static Teclado teclado; // ACCIONES DEL TECLADO
     private static Pantalla pantalla;
+    
+    private static Mapa mapa;
     
     private BufferedImage imagen = new BufferedImage(ANCHO,ALTO,BufferedImage.TYPE_INT_RGB);
     
@@ -46,6 +50,8 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
         setPreferredSize(new Dimension(ANCHO,ALTO));
         
         pantalla = new Pantalla(ANCHO,ALTO); //iniciamos la pantalla
+        
+        mapa = new MapaGenerado(128,128);
         
         teclado = new Teclado();
         addKeyListener(teclado);
@@ -87,29 +93,29 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
         teclado.actualizar();
         
         if(teclado.arriba){
-            y++;
-        }
-        if(teclado.abajo){
             y--;
         }
+        if(teclado.abajo){
+            y++;
+        }
         if(teclado.izquierda){
-            x++;
+            x--;
         }
         if(teclado.derecha){
-            x--;
+            x++;
         }
 
         if (teclado.shift && teclado.arriba) {
-            y = y + 1;
-        }
-        if (teclado.shift && teclado.abajo) {
             y = y - 1;
         }
+        if (teclado.shift && teclado.abajo) {
+            y = y + 1;
+        }
         if (teclado.shift && teclado.izquierda) {
-            x = x + 1;
+            x = x - 1;
         }
         if (teclado.shift && teclado.derecha) {
-            x = x - 1;
+            x = x + 1;
         }
         
         aps++;
@@ -123,7 +129,8 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
         }
         
         pantalla.limpiar();
-        pantalla.mostrar(x,y);
+        mapa.mostrar(x, y, pantalla);
+//        pantalla.mostrar(x,y);
         
         System.arraycopy(pantalla.pixeles, 0, pixeles, 0, pixeles.length); //es un método más fácil para copiar los graficos de la pantalla al juego
         

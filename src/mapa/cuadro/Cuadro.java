@@ -5,18 +5,29 @@ import graficos.Sprite;
 
 /**
  * Plantilla para crear cuadros.
+ * Una clase cuadro por Sprite usado.
  */
 public abstract class Cuadro {
     public int x;
     public int y;
     public Sprite sprite; //cada cuadro deberá tener un Sprite para evitar excepciones.
-
+    
+    //colección de cuadros
+    public static final Cuadro VACIO = new CuadroVacio(Sprite.VACIO);
+    public static final Cuadro TIERRA  = new CuadroTierra(Sprite.TIERRA);
+    //fin de la colección de cuadros.
+    
     public Cuadro(Sprite sprite) {
         this.sprite = sprite;
     }
-    
-    public void mostrar(int x, Pantalla pantalla){
-        
+    /**
+     * En las clases hijas se implementará de manera más específica para cada una.
+     * @param x
+     * @param y
+     * @param pantalla 
+     */
+    public void mostrar(int x,int y, Pantalla pantalla){
+        pantalla.mostrarCuadro(x << 5, y<<5, this); 
     }
     
     /**
