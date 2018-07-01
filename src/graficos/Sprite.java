@@ -11,6 +11,7 @@ public final class Sprite {
     
     //colección de sprites
     public static final Sprite VACIO = new Sprite(32,0);
+    
     public static final Sprite TIERRA = new Sprite(32, 0, 0, HojaSprites.tierra);
     public static final Sprite ESQUINA_SUP_IZ_TIERRA = new Sprite(32,1,0,HojaSprites.tierra);
     public static final Sprite SUP_MED_TIERRA = new Sprite(32,2,0,HojaSprites.tierra);
