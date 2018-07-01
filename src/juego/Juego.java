@@ -39,6 +39,9 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
     
     private static final String NOMBRE = "Placidium";
     
+    private static String contAPS = "";
+    private static String contFPS = "";
+    
     private static int aps = 0;
     private static int fps = 0;
     
@@ -62,6 +65,7 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
         ventana.setIconImage(icono.getImage()); //Pone un ícono
         ventana.setLayout(new BorderLayout());  //Para dejar ordenada la ventana
         ventana.add(this, BorderLayout.CENTER); //Para que la ventana se abra justo en el centro
+        ventana.setUndecorated(true); // Ventana sin bordes
         ventana.pack(); //TODO EL CONTENIDO SE AJUSTA AL TAMAÑO DESEADO
         ventana.setLocationRelativeTo(null); //Fija la ventana
         ventana.setVisible(true);
@@ -89,7 +93,10 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
             Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    private void actualizar(){ //para todos los eventos, como vida del usuario y enemigos, armas etc.
+    /**
+     * Verifica todos los eventos del teclado.
+     */
+    private void actualizar(){
         teclado.actualizar();
         
         if(teclado.arriba){
@@ -117,6 +124,9 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
         if (teclado.shift && teclado.derecha) {
             x = x + 1;
         }
+        if(teclado.salir){
+            System.exit(0);
+        }
         
         aps++;
     }
@@ -140,8 +150,10 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
         Graphics g= estrategia.getDrawGraphics(); //es el encargado de dibujar de la estrategia (buffer)
         g.drawImage(imagen, 0, 0, getWidth(), getHeight(), null);
         
-        g.setColor(Color.DARK_GRAY);
+        g.setColor(Color.WHITE); //PERSONAJE TEMPORAL :v
         g.fillRect(ANCHO/2,ALTO/2, 32, 32);
+        g.drawString(contAPS, 10, 20);//dibuja un string en pantalla
+        g.drawString(contFPS,10,35);
         
         g.dispose(); //destruye la memoria que g estaba usando para que no use más y más memoria
         
@@ -149,9 +161,10 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
         
         fps++;
     }
-    
+    /**
+     * método que se utilizará porque al no depender del sistema operativo para medir el tiempo transcurrido utiliza los nanosegundos del ciclo de reloj del procesador. Lo utilizamos además para mejorar la compatibilidad con los demás sistemas operativos (para que corra fluido en todos). También sirve para limitar el tiempo de ejecución del bucle.
+     */
     public void run() {
-        //método que se utilizará porque al no depender del sistema operativo para medir el tiempo transcurrido utiliza los nanosegundos del ciclo de reloj del procesador. Lo utilizamos además para mejorar la compatibilidad con los demás sistemas operativos (para que corra fluido en todos).También sirve para limitar el tiempo de ejecución del bucle.
         final int NS_POR_SEGUNDO = 1000000000; //La cantidad de nanosegundos en un segundo.
         final byte APS_OBJETIVO = 60; //ENTRE MENOR EL NÚMERO DE ACTUALIZACIONES, ES MÁS EFICIENTE EL JUEGO, PERO TAMPOCO DEBE SER MUY BAJO. La cantidad de actualizaciones por segundo
         final double NS_POR_ACTUALIZACIÓN = NS_POR_SEGUNDO / APS_OBJETIVO; //CUANTOS NANO SEGUNDOS TIENEN QUE PASAR PARA ACTUALIZAR A 60 APS. La cantidad de nanosegundos que ocurren por atualización.
@@ -179,7 +192,9 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
             
             mostrar();
             if (System.nanoTime() - referenciaContador > NS_POR_SEGUNDO){
-                ventana.setTitle(NOMBRE + " || APS: " + aps +  " || FPS: " + fps);
+                contAPS = "APS: " + aps;
+                contFPS = "FPS: " + fps;
+//                ventana.setTitle(NOMBRE + " || APS: " + aps +  " || FPS: " + fps);
                 aps = 0; //se reinicializan para que vuelva a contar y no tienda al infinito, lo mismo con fps.
                 fps = 0;
                 referenciaContador = System.nanoTime();

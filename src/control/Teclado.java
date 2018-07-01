@@ -14,8 +14,10 @@ public final class Teclado implements KeyListener{
     public boolean derecha;
     public boolean espacio;
     public boolean shift;
+    public boolean salir;
     
     public void actualizar(){
+        salir = teclas[KeyEvent.VK_ESCAPE];
         arriba = teclas[KeyEvent.VK_W];
         abajo = teclas[KeyEvent.VK_S];
         izquierda = teclas[KeyEvent.VK_A];
