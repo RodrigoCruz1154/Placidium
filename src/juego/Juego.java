@@ -130,7 +130,6 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
         
         pantalla.limpiar();
         mapa.mostrar(x, y, pantalla);
-//        pantalla.mostrar(x,y);
         
         System.arraycopy(pantalla.pixeles, 0, pixeles, 0, pixeles.length); //es un método más fácil para copiar los graficos de la pantalla al juego
         

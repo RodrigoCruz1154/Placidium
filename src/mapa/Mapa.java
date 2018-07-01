@@ -47,8 +47,11 @@ public abstract class Mapa {
     public void mostrar(int compensacionX, int compensacionY, Pantalla pantalla) {
         
         pantalla.setDiferencia(compensacionX, compensacionY);
-        
-        int norte = compensacionY >> 5, sur = (compensacionY + pantalla.getAlto()) >> 5, este = (compensacionX + pantalla.getAncho()) >> 5, oeste = compensacionX >> 5; //se hace bitshifting
+
+        int norte = compensacionY >> 5,
+                sur = (compensacionY + pantalla.getAlto() + Cuadro.LADO) >> 5,
+                este = (compensacionX + pantalla.getAncho() + Cuadro.LADO) >> 5,
+                oeste = compensacionX >> 5; //se hace bitshifting
         
         for(int y = norte; y < sur; y++){
             for(int x = oeste; x < este; x++){
@@ -67,7 +70,10 @@ public abstract class Mapa {
      * @param y
      * @return 
      */
-    public Cuadro getCuadro(final int x, final int y) {
+    public Cuadro getCuadro(final int x, final int y){
+        if(x < 0 || y < 0 || x >= ancho || y >=alto){ //permite la salida del array para que se pueda "salir" del mapa generado.
+            return Cuadro.VACIO;
+        }
         switch (cuadros[x + y * ancho]) {
             case 0:
                 return Cuadro.TIERRA;

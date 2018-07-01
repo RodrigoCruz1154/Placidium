@@ -11,6 +11,7 @@ public abstract class Cuadro {
     public int x;
     public int y;
     public Sprite sprite; //cada cuadro deberá tener un Sprite para evitar excepciones.
+    public static final int LADO = 32;
     
     //colección de cuadros
     public static final Cuadro VACIO = new CuadroVacio(Sprite.VACIO);
