@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import mapa.Mapa;
+import mapa.MapaCargado;
 import mapa.MapaGenerado;
 
 public class Juego extends Canvas implements Runnable{ //con el implements ponemos una interfaz para poder generar procesos seguidos.
@@ -54,7 +55,8 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
         
         pantalla = new Pantalla(ANCHO,ALTO); //iniciamos la pantalla
         
-        mapa = new MapaGenerado(128,128);
+        //mapa = new MapaGenerado(128,128); //inicializa un mapa generado
+        mapa = new MapaCargado("/mapas/AfuerasCastillo.png");
         
         teclado = new Teclado();
         addKeyListener(teclado);

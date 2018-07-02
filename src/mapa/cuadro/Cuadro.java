@@ -79,6 +79,9 @@ public class Cuadro {
     public static final Cuadro ESQUINA_INF_TORRE_IZ = new Cuadro(Sprite.ESQUINA_INF_TORRE_IZ);
     public static final Cuadro INF_TORRE = new Cuadro(Sprite.INF_TORRE);
     public static final Cuadro ESQUINA_INF_TORRE_DER = new Cuadro(Sprite.ESQUINA_INF_TORRE_DER);
+    public static final Cuadro PUENTE_POSTERIOR_IZ = new Cuadro(Sprite.PUENTE_POSTERIOR_IZ);
+    public static final Cuadro PUENTE_POSTERIOR_MED = new Cuadro(Sprite.PUENTE_POSTERIOR_MED);
+    public static final Cuadro PUENTE_POSTERIOR_DER = new Cuadro(Sprite.PUENTE_POSTERIOR_DER);
     //fin de la colección de cuadros.
     
     public Cuadro(Sprite sprite) {

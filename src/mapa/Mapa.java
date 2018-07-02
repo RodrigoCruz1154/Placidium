@@ -30,6 +30,7 @@ public abstract class Mapa {
      */
     public Mapa(String ruta){
         cargarMapa(ruta);
+        generarMapa();
     }
     
     protected void cargarMapa(String ruta){     
@@ -57,7 +58,12 @@ public abstract class Mapa {
         
         for(int y = norte; y < sur; y++){
             for(int x = oeste; x < este; x++){
-                getCuadro(x,y).mostrar(x,y,pantalla);
+                //getCuadro(x,y).mostrar(x,y,pantalla); //Genera los mapas aleatorios
+                if(x<0 || y < 0 || x>=ancho || y>=alto){
+                    Cuadro.VACIO.mostrar(x, y, pantalla);
+                } else{
+                    cuadrosCatalogo[x+y*ancho].mostrar(x, y, pantalla);
+                }
             }
         }
         

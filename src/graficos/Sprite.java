@@ -74,6 +74,9 @@ public final class Sprite {
     public static final Sprite ESQUINA_INF_TORRE_IZ = new Sprite(32,1,8,HojaSprites.tierra);
     public static final Sprite INF_TORRE = new Sprite(32,2,8,HojaSprites.tierra);
     public static final Sprite ESQUINA_INF_TORRE_DER = new Sprite(32,3,8,HojaSprites.tierra);
+    public static final Sprite PUENTE_POSTERIOR_IZ = new Sprite(32,5,8,HojaSprites.tierra);
+    public static final Sprite PUENTE_POSTERIOR_MED = new Sprite(32,6,8,HojaSprites.tierra);
+    public static final Sprite PUENTE_POSTERIOR_DER = new Sprite(32,7,8,HojaSprites.tierra);
     //fin de la colección
     
     /**
