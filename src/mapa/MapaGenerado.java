@@ -22,7 +22,7 @@ public class MapaGenerado extends Mapa {
     protected void generarMapa() {
         for (int y = 0; y < alto; y++) {
             for (int x = 0; x < ancho; x++) {
-                cuadros[x+y*ancho] = aleatorio.nextInt(3);
+                cuadros[x+y*ancho] = aleatorio.nextInt(54);
             }
         }
     }

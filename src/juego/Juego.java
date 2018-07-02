@@ -152,8 +152,9 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
         
         g.setColor(Color.WHITE); //PERSONAJE TEMPORAL :v
         g.fillRect(ANCHO/2,ALTO/2, 32, 32);
-        g.drawString(contAPS, 10, 20);//dibuja un string en pantalla
-        g.drawString(contFPS,10,35);
+        g.drawString("Placidium",10,20);
+        g.drawString(contAPS, 10, 35);//dibuja un string en pantalla
+        g.drawString(contFPS,10,50);
         
         g.dispose(); //destruye la memoria que g estaba usando para que no use más y más memoria
         

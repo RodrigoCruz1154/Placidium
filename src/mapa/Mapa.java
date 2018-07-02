@@ -9,7 +9,9 @@ import mapa.cuadro.Cuadro;
 public abstract class Mapa {
     protected int ancho;
     protected int alto;
+    
     protected int[] cuadros;
+    protected Cuadro[] cuadrosCatalogo;
     
     /**
      * Genera un mapa aleatorio.
