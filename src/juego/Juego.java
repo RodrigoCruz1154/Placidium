@@ -1,6 +1,7 @@
 package juego;
 
 import control.Teclado;
+import entes.creaturas.Jugador;
 import graficos.Pantalla;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
@@ -16,7 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import mapa.Mapa;
 import mapa.MapaCargado;
-import mapa.MapaGenerado;
+
 
 public class Juego extends Canvas implements Runnable{ //con el implements ponemos una interfaz para poder generar procesos seguidos.
 
@@ -26,6 +27,8 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
     private static Pantalla pantalla;
     
     private static Mapa mapa;
+    
+    private static Jugador jugador;
     
     private BufferedImage imagen = new BufferedImage(ANCHO,ALTO,BufferedImage.TYPE_INT_RGB);
     
@@ -46,9 +49,6 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
     private static int aps = 0;
     private static int fps = 0;
     
-    private static int x=0;
-    private static int y=0;
-    
     
     private Juego(){
         setPreferredSize(new Dimension(ANCHO,ALTO));
@@ -56,11 +56,12 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
         pantalla = new Pantalla(ANCHO,ALTO); //iniciamos la pantalla
         
         //mapa = new MapaGenerado(128,128); //inicializa un mapa generado
-        mapa = new MapaCargado("/mapas/AfuerasCastillo.png");
-        
         teclado = new Teclado();
         addKeyListener(teclado);
-        
+        mapa = new MapaCargado("/mapas/AfuerasCastillo.png");
+
+        jugador = new Jugador(teclado);
+
         ventana = new JFrame(NOMBRE);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //El usuario podrá cerrar la ventana al pulsar "x"
         ventana.setResizable(false); //El usuario no podrá cambiar el tamaño de la ventana
@@ -74,9 +75,8 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
     }
 
     public static void main(String[] args) {
-            Juego juego = new Juego();
-            juego.iniciar();
-            
+        Juego juego = new Juego();
+        juego.iniciar();
     }
     
 //threads a ejecutarse en segundo plano y que harán que "se ejecuten varios procesos a la vez"
@@ -86,6 +86,7 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
         thread = new Thread(this, "Gráficos");
         thread.start();
     }
+    
     private synchronized void detener(){
         enFuncionamiento = false;
         
@@ -95,44 +96,26 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
             Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     /**
      * Verifica todos los eventos del teclado.
      */
     private void actualizar(){
         teclado.actualizar();
         
-        if(teclado.arriba){
-            y--;
-        }
-        if(teclado.abajo){
-            y++;
-        }
-        if(teclado.izquierda){
-            x--;
-        }
-        if(teclado.derecha){
-            x++;
-        }
-
-        if (teclado.shift && teclado.arriba) {
-            y = y - 1;
-        }
-        if (teclado.shift && teclado.abajo) {
-            y = y + 1;
-        }
-        if (teclado.shift && teclado.izquierda) {
-            x = x - 1;
-        }
-        if (teclado.shift && teclado.derecha) {
-            x = x + 1;
-        }
+        jugador.actualizar();
+        
         if(teclado.salir){
             System.exit(0);
         }
         
         aps++;
     }
-    private void mostrar(){ //redibujar gráficos
+    
+    /**
+     * Redibuja gráficos
+     */
+    private void mostrar(){
         BufferStrategy estrategia = getBufferStrategy();
         
         if(estrategia == null){
@@ -140,8 +123,8 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
             return;
         }
         
-        pantalla.limpiar();
-        mapa.mostrar(x, y, pantalla);
+        //pantalla.limpiar();
+        mapa.mostrar(jugador.getposicionX(), jugador.getposicionY(), pantalla); //DIBUJA EL MAPA EN PANTALLA
         
         System.arraycopy(pantalla.pixeles, 0, pixeles, 0, pixeles.length); //es un método más fácil para copiar los graficos de la pantalla al juego
         
@@ -157,6 +140,8 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
         g.drawString("Placidium",10,20);
         g.drawString(contAPS, 10, 35);//dibuja un string en pantalla
         g.drawString(contFPS,10,50);
+        g.drawString("Posición X: " + jugador.getposicionX(),10,65);
+        g.drawString("Posición Y: " + jugador.getposicionY(),10,80);
         
         g.dispose(); //destruye la memoria que g estaba usando para que no use más y más memoria
         
@@ -164,6 +149,7 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
         
         fps++;
     }
+    
     /**
      * método que se utilizará porque al no depender del sistema operativo para medir el tiempo transcurrido utiliza los nanosegundos del ciclo de reloj del procesador. Lo utilizamos además para mejorar la compatibilidad con los demás sistemas operativos (para que corra fluido en todos). También sirve para limitar el tiempo de ejecución del bucle.
      */

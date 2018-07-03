@@ -33,7 +33,6 @@ public final class Teclado implements KeyListener{
 
     public void keyReleased(KeyEvent e) { //método para cuando se suelte una tecla
         teclas[e.getKeyCode()] = false;
-
     }
     
         public void keyTyped(KeyEvent e) { // LA ACCIÓN COMPLETA DE SOLTAR Y PRESIONAR LA TECLA
