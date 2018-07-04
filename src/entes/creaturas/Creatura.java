@@ -32,8 +32,12 @@ public abstract class Creatura extends Ente {
         }
         
         if(!isEliminado()){
-            modificarPosX(desplazamientoX);
-            modificarPosY(desplazamientoY);
+            if (!enColision(desplazamientoX, 0)) {
+                modificarPosX(desplazamientoX);
+            }
+            if (!enColision(0, desplazamientoY)) {
+                modificarPosY(desplazamientoY);
+            }
         }
     }
 
@@ -41,7 +45,36 @@ public abstract class Creatura extends Ente {
         return sprite;
     }
     
-    private boolean enColision(){
-        return false;
+    private boolean enColision(int desplazamientoX, int desplazamientoY){
+        
+        boolean colision = false;
+        
+        int posicionX = x + desplazamientoX;
+        int posicionY = y + desplazamientoY;
+        
+        int margenIzquierdo = 26;
+        int margenDerecho = 16;
+        int margenSuperior = 20;
+        int margenInferior = 30;
+
+        int bordeIzquierdo = (posicionX + margenDerecho) / sprite.getLado();
+        int bordeDerecho = (posicionX + margenIzquierdo) / sprite.getLado();
+        int bordeSuperior = (posicionY + margenInferior) / sprite.getLado();
+        int bordeInferior = (posicionY + margenSuperior) / sprite.getLado();
+
+        if (mapa.getCuadrosCatalogo(bordeIzquierdo + bordeSuperior * mapa.getAncho()).issolido()) {
+            colision = true;
+        }
+        if (mapa.getCuadrosCatalogo(bordeIzquierdo + bordeInferior * mapa.getAncho()).issolido()) {
+            colision = true;
+        }
+        if (mapa.getCuadrosCatalogo(bordeDerecho + bordeSuperior * mapa.getAncho()).issolido()) {
+            colision = true;
+        }
+        if (mapa.getCuadrosCatalogo(bordeDerecho + bordeInferior * mapa.getAncho()).issolido()) {
+            colision = true;
+        }
+
+        return colision;
     }
 }

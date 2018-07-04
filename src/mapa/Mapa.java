@@ -12,6 +12,15 @@ public abstract class Mapa {
     
     protected int[] cuadros;
     protected Cuadro[] cuadrosCatalogo;
+
+    public Cuadro getCuadrosCatalogo(int posicion) {
+        return cuadrosCatalogo[posicion];
+    }
+
+    public int getAncho() {
+        return ancho;
+    }
+    
     
     /**
      * Genera un mapa aleatorio.

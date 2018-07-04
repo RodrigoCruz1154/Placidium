@@ -61,7 +61,7 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
         addKeyListener(teclado);
         mapa = new MapaCargado("/mapas/AfuerasCastillo.png"); //Carga un mapa
 
-        jugador = new Jugador(teclado,Sprite.FRONTAL_QUIETO,270,450);
+        jugador = new Jugador(mapa,teclado,Sprite.FRONTAL_QUIETO,270,450);
 
         ventana = new JFrame(NOMBRE);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //El usuario podrá cerrar la ventana al pulsar "x"
