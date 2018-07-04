@@ -61,6 +61,7 @@ public class Jugador extends Creatura {
         } else {
             enMovimiento = false;
         }
+        int resto = animacion % 40;
         if (direccion == 'n') {
             sprite = Sprite.POSTERIOR_QUIETO;
             if(enMovimiento){
@@ -84,21 +85,29 @@ public class Jugador extends Creatura {
         if (direccion == 'e') {
             sprite = Sprite.DERECHA_QUIETO;
             if(enMovimiento){
-            if (animacion % 28 > 14) {
-                sprite = Sprite.DERECHA_MOVIENDOSE1;
-            } else {
-                sprite = Sprite.DERECHA_MOVIENDOSE2;
-            }
+                if(resto > 10 && resto <= 20){
+                    sprite = Sprite.DERECHA_MOVIENDOSE1;
+                } else if (resto > 20 && resto <= 30){
+                    sprite = Sprite.DERECHA_QUIETO;
+                } else if(resto >30){
+                    sprite = Sprite.DERECHA_MOVIENDOSE2;
+                } else{
+                    sprite = sprite = Sprite.DERECHA_QUIETO;
+                }
             }
         }
         if (direccion == 'o') {
             sprite = Sprite.IZQUIERDA_QUIETO;
             if(enMovimiento){
-                if (animacion % 28 > 14) {
-                sprite = Sprite.IZQUIERDA_MOVIENDOSE1;
-            } else {
-                sprite = Sprite.IZQUIERDA_MOVIENDOSE2;
-            }
+                if(resto > 10 && resto <= 20){
+                    sprite = Sprite.IZQUIERDA_MOVIENDOSE1;
+                } else if (resto > 20 && resto <= 30){
+                    sprite = Sprite.IZQUIERDA_QUIETO;
+                } else if(resto >30){
+                    sprite = Sprite.IZQUIERDA_MOVIENDOSE2;
+                } else{
+                    sprite = sprite = Sprite.IZQUIERDA_QUIETO;
+                }
             }
         }
     }
