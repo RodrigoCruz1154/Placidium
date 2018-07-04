@@ -52,10 +52,10 @@ public abstract class Creatura extends Ente {
         int posicionX = x + desplazamientoX;
         int posicionY = y + desplazamientoY;
         
-        int margenIzquierdo = 26;
-        int margenDerecho = 16;
-        int margenSuperior = 20;
-        int margenInferior = 30;
+        int margenIzquierdo = 18;
+        int margenDerecho = 14;
+        int margenSuperior = 18;
+        int margenInferior = 32;
 
         int bordeIzquierdo = (posicionX + margenDerecho) / sprite.getLado();
         int bordeDerecho = (posicionX + margenIzquierdo) / sprite.getLado();
