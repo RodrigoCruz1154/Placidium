@@ -15,7 +15,7 @@ public abstract class Ente {
 
     }
 
-    public void mostar() {
+    public void mostrar() {
 
     }
 

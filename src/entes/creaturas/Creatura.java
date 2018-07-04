@@ -36,6 +36,10 @@ public abstract class Creatura extends Ente {
             modificarPosY(desplazamientoY);
         }
     }
+
+    public Sprite getSprite() {
+        return sprite;
+    }
     
     private boolean enColision(){
         return false;

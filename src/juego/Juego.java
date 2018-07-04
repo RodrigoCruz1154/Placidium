@@ -3,6 +3,7 @@ package juego;
 import control.Teclado;
 import entes.creaturas.Jugador;
 import graficos.Pantalla;
+import graficos.Sprite;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
@@ -58,9 +59,9 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
         //mapa = new MapaGenerado(128,128); //inicializa un mapa generado
         teclado = new Teclado();
         addKeyListener(teclado);
-        mapa = new MapaCargado("/mapas/AfuerasCastillo.png");
+        mapa = new MapaCargado("/mapas/AfuerasCastillo.png"); //Carga un mapa
 
-        jugador = new Jugador(teclado);
+        jugador = new Jugador(teclado,Sprite.FRONTAL_QUIETO,270,450);
 
         ventana = new JFrame(NOMBRE);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //El usuario podrá cerrar la ventana al pulsar "x"
@@ -124,8 +125,8 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
         }
         
         //pantalla.limpiar();
-        mapa.mostrar(jugador.getposicionX(), jugador.getposicionY(), pantalla); //DIBUJA EL MAPA EN PANTALLA
-        
+        mapa.mostrar(jugador.getposicionX() - pantalla.getAncho()/2 + jugador.getSprite().getLado()/2, jugador.getposicionY() - pantalla.getAlto()/2 + jugador.getSprite().getLado()/2, pantalla); //DIBUJA EL MAPA EN PANTALLA
+        jugador.mostrar(pantalla);
         System.arraycopy(pantalla.pixeles, 0, pixeles, 0, pixeles.length); //es un método más fácil para copiar los graficos de la pantalla al juego
         
         // for(int i=0;i<pixeles.length;i++){
@@ -135,8 +136,7 @@ public class Juego extends Canvas implements Runnable{ //con el implements ponem
         Graphics g= estrategia.getDrawGraphics(); //es el encargado de dibujar de la estrategia (buffer)
         g.drawImage(imagen, 0, 0, getWidth(), getHeight(), null);
         
-        g.setColor(Color.WHITE); //PERSONAJE TEMPORAL :v
-        g.fillRect(ANCHO/2,ALTO/2, 32, 32);
+        g.setColor(Color.yellow); //PERSONAJE TEMPORAL :v
         g.drawString("Placidium",10,20);
         g.drawString(contAPS, 10, 35);//dibuja un string en pantalla
         g.drawString(contFPS,10,50);
