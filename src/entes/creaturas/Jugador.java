@@ -32,24 +32,30 @@ public class Jugador extends Creatura {
     public void actualizar() {
         int desplazamientoX = 0;
         int desplazamientoY = 0;
-        
-        if(animacion< 32767){
+        int velocidadMovimiento = 1;
+        boolean estaCorriendo = false;
+
+        if (animacion < 32767) {
             animacion++;
-        } else{
+        } else {
             animacion = 0;
         }
-        
+
+        if (teclado.shift) {
+            velocidadMovimiento = 2;
+            estaCorriendo=true;
+        }
         if (teclado.arriba) {
-            desplazamientoY--;
+            desplazamientoY -= velocidadMovimiento;
         }
         if (teclado.abajo) {
-            desplazamientoY++;
+            desplazamientoY += velocidadMovimiento;
         }
         if (teclado.izquierda) {
-            desplazamientoX--;
+            desplazamientoX -= velocidadMovimiento;
         }
         if (teclado.derecha) {
-            desplazamientoX++;
+            desplazamientoX += velocidadMovimiento;
         }
 
         /**
@@ -61,52 +67,105 @@ public class Jugador extends Creatura {
         } else {
             enMovimiento = false;
         }
+
         int resto = animacion % 40;
         if (direccion == 'n') {
             sprite = Sprite.POSTERIOR_QUIETO;
-            if(enMovimiento){
-                if(animacion % 26 > 13){
+            if (enMovimiento) {
+                if (resto > 10 && resto <= 20) {
                     sprite = Sprite.POSTERIOR_MOVIENDOSE1;
-                } else{
+                } else if (resto > 20 && resto <= 30) {
+                    sprite = Sprite.POSTERIOR_QUIETO;
+                } else if (resto > 30) {
                     sprite = Sprite.POSTERIOR_MOVIENDOSE2;
+                } else {
+                    sprite = sprite = Sprite.POSTERIOR_QUIETO;
+                }
+                if (estaCorriendo) {
+                    if (resto > 10 && resto <= 20) {
+                        sprite = Sprite.POSTERIOR_CORRIENDO1;
+                    } else if (resto > 20 && resto <= 30) {
+                        sprite = Sprite.POSTERIOR_CORRIENDO2;
+                    } else if (resto > 30) {
+                        sprite = Sprite.POSTERIOR_CORRIENDO3;
+                    } else {
+                        sprite = sprite = Sprite.POSTERIOR_CORRIENDO2;
+                    }
                 }
             }
         }
         if (direccion == 's') {
             sprite = Sprite.FRONTAL_QUIETO;
-            if(enMovimiento){
-            if (animacion % 26 > 13) {
-                sprite = Sprite.FRONTAL_MOVIENDOSE1;
-            } else {
-                sprite = Sprite.FRONTAL_MOVIENDOSE2;
-            }
+            if (enMovimiento) {
+                if (resto > 10 && resto <= 20) {
+                    sprite = Sprite.FRONTAL_MOVIENDOSE1;
+                } else if (resto > 20 && resto <= 30) {
+                    sprite = Sprite.FRONTAL_QUIETO;
+                } else if (resto > 30) {
+                    sprite = Sprite.FRONTAL_MOVIENDOSE2;
+                } else {
+                    sprite = sprite = Sprite.FRONTAL_QUIETO;
+                }
+                if (estaCorriendo) {
+                    if (resto > 10 && resto <= 20) {
+                        sprite = Sprite.FRONTAL_CORRIENDO1;
+                    } else if (resto > 20 && resto <= 30) {
+                        sprite = Sprite.FRONTAL_CORRIENDO2;
+                    } else if (resto > 30) {
+                        sprite = Sprite.FRONTAL_CORRIENDO3;
+                    } else {
+                        sprite = sprite = Sprite.FRONTAL_CORRIENDO2;
+                    }
+                }
             }
         }
         if (direccion == 'e') {
             sprite = Sprite.DERECHA_QUIETO;
-            if(enMovimiento){
-                if(resto > 10 && resto <= 20){
+            if (enMovimiento) {
+                if (resto > 10 && resto <= 20) {
                     sprite = Sprite.DERECHA_MOVIENDOSE1;
-                } else if (resto > 20 && resto <= 30){
+                } else if (resto > 20 && resto <= 30) {
                     sprite = Sprite.DERECHA_QUIETO;
-                } else if(resto >30){
+                } else if (resto > 30) {
                     sprite = Sprite.DERECHA_MOVIENDOSE2;
-                } else{
+                } else {
                     sprite = sprite = Sprite.DERECHA_QUIETO;
+                }
+                if (estaCorriendo) {
+                    if (resto > 10 && resto <= 20) {
+                        sprite = Sprite.DERECHA_CORRIENDO1;
+                    } else if (resto > 20 && resto <= 30) {
+                        sprite = Sprite.DERECHA_CORRIENDO2;
+                    } else if (resto > 30) {
+                        sprite = Sprite.DERECHA_CORRIENDO3;
+                    } else {
+                        sprite = sprite = Sprite.DERECHA_CORRIENDO2;
+                    }
                 }
             }
         }
         if (direccion == 'o') {
             sprite = Sprite.IZQUIERDA_QUIETO;
-            if(enMovimiento){
-                if(resto > 10 && resto <= 20){
+            if (enMovimiento) {
+                if (resto > 10 && resto <= 20) {
                     sprite = Sprite.IZQUIERDA_MOVIENDOSE1;
-                } else if (resto > 20 && resto <= 30){
+                } else if (resto > 20 && resto <= 30) {
                     sprite = Sprite.IZQUIERDA_QUIETO;
-                } else if(resto >30){
+                } else if (resto > 30) {
                     sprite = Sprite.IZQUIERDA_MOVIENDOSE2;
-                } else{
+                } else {
                     sprite = sprite = Sprite.IZQUIERDA_QUIETO;
+                }
+                if (estaCorriendo) {
+                    if (resto > 10 && resto <= 20) {
+                        sprite = Sprite.IZQUIERDA_CORRIENDO1;
+                    } else if (resto > 20 && resto <= 30) {
+                        sprite = Sprite.IZQUIERDA_CORRIENDO2;
+                    } else if (resto > 30) {
+                        sprite = Sprite.IZQUIERDA_CORRIENDO3;
+                    } else {
+                        sprite = sprite = Sprite.IZQUIERDA_CORRIENDO2;
+                    }
                 }
             }
         }

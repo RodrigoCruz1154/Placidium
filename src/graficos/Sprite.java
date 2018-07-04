@@ -15,18 +15,31 @@ public final class Sprite {
     public static final Sprite FRONTAL_QUIETO = new Sprite(32,0,0,HojaSprites.jugador);
     public static final Sprite FRONTAL_MOVIENDOSE1 = new Sprite(32,0,1,HojaSprites.jugador);
     public static final Sprite FRONTAL_MOVIENDOSE2 = new Sprite(32,0,2,HojaSprites.jugador);
+    public static final Sprite FRONTAL_CORRIENDO1 = new Sprite(32,0,3,HojaSprites.jugador);
+    public static final Sprite FRONTAL_CORRIENDO2 = new Sprite(32,0,4,HojaSprites.jugador);
+    public static final Sprite FRONTAL_CORRIENDO3 = new Sprite(32,0,5,HojaSprites.jugador);
     
     public static final Sprite POSTERIOR_QUIETO = new Sprite(32,1,0,HojaSprites.jugador);
     public static final Sprite POSTERIOR_MOVIENDOSE1 = new Sprite(32,1,1,HojaSprites.jugador);
     public static final Sprite POSTERIOR_MOVIENDOSE2 = new Sprite(32,1,2,HojaSprites.jugador);
+    public static final Sprite POSTERIOR_CORRIENDO1 = new Sprite(32,1,3,HojaSprites.jugador);
+    public static final Sprite POSTERIOR_CORRIENDO2 = new Sprite(32,1,4,HojaSprites.jugador);
+    public static final Sprite POSTERIOR_CORRIENDO3 = new Sprite(32,1,5,HojaSprites.jugador);
     
     public static final Sprite DERECHA_QUIETO = new Sprite(32,2,0,HojaSprites.jugador);
     public static final Sprite DERECHA_MOVIENDOSE1 = new Sprite(32,2,1,HojaSprites.jugador);
     public static final Sprite DERECHA_MOVIENDOSE2 = new Sprite(32,2,2,HojaSprites.jugador);
+    public static final Sprite DERECHA_CORRIENDO1 = new Sprite(32,2,3,HojaSprites.jugador);
+    public static final Sprite DERECHA_CORRIENDO2 = new Sprite(32,2,4,HojaSprites.jugador);
+    public static final Sprite DERECHA_CORRIENDO3 = new Sprite(32,2,5,HojaSprites.jugador);
     
     public static final Sprite IZQUIERDA_QUIETO = new Sprite(32,3,0,HojaSprites.jugador);
     public static final Sprite IZQUIERDA_MOVIENDOSE1 = new Sprite(32,3,1,HojaSprites.jugador);
     public static final Sprite IZQUIERDA_MOVIENDOSE2 = new Sprite(32,3,2,HojaSprites.jugador);
+    public static final Sprite IZQUIERDA_CORRIENDO1 = new Sprite(32,3,3,HojaSprites.jugador);
+    public static final Sprite IZQUIERDA_CORRIENDO2 = new Sprite(32,3,4,HojaSprites.jugador);
+    public static final Sprite IZQUIERDA_CORRIENDO3 = new Sprite(32,3,5,HojaSprites.jugador);
+    
     //fin de la colección de sprites del jugador
 
 //colección de sprites del mapa 
